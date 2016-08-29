@@ -1,0 +1,67 @@
+@media (min-width: 671px) {
+
+
+}
+@media (min-width: 520px) and (max-width: 670px) {
+
+    .single-input{
+        width: 150px !important;
+    }
+
+
+}
+@media (min-width: 320px) and (max-width: 520px) {
+
+    .single-input{
+        width: 100px !important;
+    }
+
+}
+
+
+.home-container{
+    width: 100%;
+    height: 100%;
+}
+
+.git-header{
+    padding-bottom: 20px;
+}
+
+.git-header{
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    margin-top: 20px;
+    display: inline;
+    font-weight: bolder;
+}
+
+.git-img{
+    width: 10%;
+
+}
+
+.url-container{
+    padding-bottom: 30px;
+}
+
+.url-input{
+    display: inline-flex;
+}
+
+.back-slash{
+    font-size: 90px;
+}
+
+.form-control{
+    position: relative;
+    top: 50;
+}
+
+.single-input{
+    width: 200px;
+    margin: auto;
+}
