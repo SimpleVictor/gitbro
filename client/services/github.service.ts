@@ -6,7 +6,7 @@ import {Observable} from "rxjs/Rx";
 export class GithubService{
 
     testArg ="sdfsdf";
-    secretToken:string= "<GITHUB'S TOKEN HERE>";
+    secretToken:string= "<GITHUB TOKEN HERE>";
 
     constructor(private _http: Http){
 
@@ -24,8 +24,8 @@ export class GithubService{
 
 
     getFileContent(dataUrl){
-        let setupUrl = dataUrl+"?access_token="+this.secretToken;
-        return this._http.get(dataUrl, {headers: {"Accept": "application/vnd.github-blob.raw"}}).catch(this.handleError);
+        let setupUrl = `${dataUrl}?access_token=${this.secretToken}`;
+        return this._http.get(setupUrl, {headers: {"Accept": "application/vnd.github-blob.raw"}}).catch(this.handleError);
     }
 
 

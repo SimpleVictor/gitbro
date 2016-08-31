@@ -37,8 +37,6 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
         //WE HAD TO SET IT UP THIS WAY BECAUSE "this" IS DIFFERENT INSIDE OF THE ON CLICK FUNCTION THAT JQUERY PROVIDES
         var vm = this;
 
-        //MAKES IT SO IT APPIES THE CSS AND JS TO ALL OF "PRE"/"CODE" ELEMENTS
-        Prism.highlightAll();
 
         //LISTEN FOR THE CLICK EVENTS ON THE FILES
         $(this.el.nativeElement).on("click", '.singleLI',function(data){
@@ -58,6 +56,8 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     ngDoCheck(){
         if(this.myUrl){
             console.log("loading should begin now");
+            this._fileSplitter.fullDirectory = [];
+            console.log("Emptying last query..");
             this.searchingUrl = true;
             let returnState = this._gitService.getSouceCodeStructure(this.myUrl.first_param, this.myUrl.second_param)
             .subscribe(
@@ -77,6 +77,8 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     }
 
     ngAfterViewChecked(){
+        //MAKES IT SO IT APPIES THE CSS AND JS TO ALL OF "PRE"/"CODE" ELEMENTS
+        Prism.highlightAll();
     }
 
 
