@@ -1,5 +1,5 @@
-## Git Brother
-# Still under development
+# Git Brother
+## Still under development
 
 <p align="center">
   <a href="">
@@ -13,25 +13,25 @@
 <p>Web application to showcaseviet.le your source codes from github!</p>
 
 
-# Install dependencies
+## Install dependencies
 ```
 npm install
 ```
 
-# Input Github's api Token (Github Profile Settings-->Personal Access Tokens)
+## Input Github's api Token (Github Profile Settings-->Personal Access Tokens)
 ```
 ./client/services/github.service.ts
 secretToken:string= "<GITHUB TOKEN HERE>";
 ```
 
 
-# start server
+## start server
 ```
 node ./bin/www
 ```
 
 
-# Applciation url: http://localhost:3000
+## Applciation url: http://localhost:3000
 ```
 http://localhost:3000
 
