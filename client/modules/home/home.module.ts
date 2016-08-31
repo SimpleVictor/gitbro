@@ -6,11 +6,14 @@ import { HomeComponent } from "./home.component";
 import { routing } from "./home.routing";
 import { SharedModule } from "../shared/shared.module";
 import {TextEditorComponent} from "../../components/texteditor/texteditor.component";
+import {BrowserModule} from "@angular/platform-browser";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
-        CommonModule,
+        BrowserModule,
         routing,
+        FormsModule,
         SharedModule.forRoot(),
         NgSemanticModule,
     ],

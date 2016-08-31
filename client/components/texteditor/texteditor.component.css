@@ -1,0 +1,35 @@
+.ui.raised.segment{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.directory-row{
+    height: 100%;
+}
+
+.my-directory{
+
+    border: 1px solid red;
+    height: 100%;
+
+}
+.my-directory > ul {
+    list-style: none;
+    padding: 20px;
+}
+
+.my-directory > ul > li{
+    font-size: 20px;
+}
+
+pre{
+    height: 100%;
+}
+
+.my-source{
+    border: 1px solid green;
+    height: 100%;
+    padding: 0 !important;
+
+}

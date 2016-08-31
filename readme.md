@@ -10,7 +10,7 @@
 - Angular 2
 - Github API
 
-<p>Web application to showcase your source codes from github!</p>
+<p>Web application to showcaseviet.le your source codes from github!</p>
 
 # Install dependencies
 ```
