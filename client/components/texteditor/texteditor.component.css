@@ -23,7 +23,9 @@
     top: -2.5%;
 }
 
-
+pre.line-numbers{
+    padding-left: 3.5em !important;
+}
 
 
 .directory-row{

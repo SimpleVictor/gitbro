@@ -31,7 +31,7 @@ node ./bin/www
 ```
 
 
-## Applciation url: http://localhost:3000
+## Application url: http://localhost:3000
 ```
 http://localhost:3000
 
