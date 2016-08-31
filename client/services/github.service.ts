@@ -6,7 +6,7 @@ import {Observable} from "rxjs/Rx";
 export class GithubService{
 
     testArg ="sdfsdf";
-    secretToken:string= "<GITHUB TOKEN HERE>";
+    secretToken:string= "<GITHUB'S TOKEN HERE>";
 
     constructor(private _http: Http){
 
@@ -22,6 +22,14 @@ export class GithubService{
 
     }
 
+
+    getFileContent(dataUrl){
+        let setupUrl = dataUrl+"?access_token="+this.secretToken;
+        return this._http.get(dataUrl, {headers: {"Accept": "application/vnd.github-blob.raw"}}).catch(this.handleError);
+    }
+
+
+
     private handleError (error: any) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
@@ -29,13 +37,6 @@ export class GithubService{
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead
         return Observable.throw(errMsg);
-    }
-
-
-    OutputCode(){
-
-
-
     }
 
 }

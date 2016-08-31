@@ -16,7 +16,10 @@
         <div class="toolbar">Git Brother</div>
         <!--DIRECTORY CODES-->
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 my-directory">
-            <h4>Folders</h4>
+            <h4>Folders</h4><div *ngIf="searchingFile" id="fileloader" class="ui active small loader"></div>
+            <!--Loader for file changes-->
+
+
             <div class="directory-file">
                 <!--THIS IS WHERE WE WILL APPEND THE HTML DYNAMICALLY-->
             </div>
@@ -25,9 +28,7 @@
 
         <!--SOURCE CODES-->
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 my-source">
-                <pre class="line-numbers">
-<code class="language-javascript"></code>
-                </pre>
+                <pre class="line-numbers"><code id="mycodeoutput" class="language-javascript">console.log("checks");</code></pre>
         </div>
 
     </div>

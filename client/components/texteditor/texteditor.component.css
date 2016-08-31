@@ -10,6 +10,22 @@
     background-color: black;
 }
 
+/*.ui.small.loader{*/
+    /*position: relative !important;*/
+/*}*/
+
+/*.ui.loader{*/
+    /*top: -2%;*/
+/*}*/
+
+#fileloader{
+    position: relative !important;
+    top: -2.5%;
+}
+
+
+
+
 .directory-row{
     height: 100%;
 }

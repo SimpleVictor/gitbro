@@ -19,10 +19,11 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     //WILL CONTAIN THE INPUT FIELDS FROM THE PARENT'S COMPONENT
     @Input() myUrl;
 
-    testOutput;
+    codeOutput: string;
 
     //LOADER
     searchingUrl:boolean = false;
+    searchingFile:boolean = false;
     startNow: boolean = false;
 
 
@@ -32,12 +33,24 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
 
 
     ngOnInit(){
+
+        //WE HAD TO SET IT UP THIS WAY BECAUSE "this" IS DIFFERENT INSIDE OF THE ON CLICK FUNCTION THAT JQUERY PROVIDES
+        var vm = this;
+
         //MAKES IT SO IT APPIES THE CSS AND JS TO ALL OF "PRE"/"CODE" ELEMENTS
         Prism.highlightAll();
 
         //LISTEN FOR THE CLICK EVENTS ON THE FILES
         $(this.el.nativeElement).on("click", '.singleLI',function(data){
-           console.log(data.target.children[0].innerHTML);
+            vm.searchingFile = true;
+            let objectURL = data.target.children[0].innerHTML;
+            if (data.target.children[1].className === 'file text outline icon') {
+                vm.fileClicked(objectURL);
+
+            };
+            if (data.target.children[1].className === 'folder outline icon') {
+                vm.directoryClicked(objectURL);
+            };
         });
 
     }
@@ -107,6 +120,32 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
         console.log("all done!");
 
     }
+
+
+    fileClicked(dataUrl){
+        this._gitService.getFileContent(dataUrl)
+            .subscribe(
+                data => {
+                    this.searchingFile = false;
+                    console.log(data);
+                    $('#mycodeoutput').empty();
+                    $('#mycodeoutput').append(data._body);
+
+                    // this.codeOutput = data._body;
+                }, err => {
+                    this.searchingFile = false;
+                    console.log(err);
+                }
+            );
+    }
+
+    directoryClicked(dataUrl){
+        console.log(dataUrl);
+        this.searchingFile = false;
+    }
+
+
+
 
 
 }
