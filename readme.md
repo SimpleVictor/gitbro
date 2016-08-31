@@ -12,13 +12,18 @@
 
 <p>Web application to showcaseviet.le your source codes from github!</p>
 
+
 # Install dependencies
 ```
 npm install
 ```
+
+# Input Github's api Token (Github Profile Settings-->Personal Access Tokens)
 ```
-bower install
+./client/services/github.service.ts
+secretToken:string= "<GITHUB TOKEN HERE>";
 ```
+
 
 # start server
 ```

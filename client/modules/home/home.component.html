@@ -14,11 +14,11 @@
 
                     <input type="text" class="form-control single-input" value="https://github.com">
                     <span class="back-slash ">/</span>
-                    <input (keyup)="0" type="text" name="first_param" [(ngModel)]="urlForm.first_param" class="form-control single-input" placeholder="username">
+                    <input type="text" name="first_param" [(ngModel)]="urlForm.first_param" class="form-control single-input" placeholder="username">
                     <span class="back-slash">/</span>
-                    <input (keyup)="0" name="second_param" [(ngModel)]="urlForm.second_param" type="text" class="form-control single-input" placeholder="repository">
+                    <input name="second_param" [(ngModel)]="urlForm.second_param" type="text" class="form-control single-input" placeholder="repository">
                 </form>
-                    <button class="btn btn-primary text-center ">Go!</button>
+                    <button class="btn btn-primary text-center" (keypress)="onSubmit()"  (click)="onSubmit()">Go!</button>
             </div>
 
 
@@ -26,7 +26,7 @@
     </div>
 
 
-    <my-text-editor [sendForm]="urlForm"></my-text-editor>
+    <my-text-editor [myUrl]="buttonPressed"></my-text-editor>
 
 
 

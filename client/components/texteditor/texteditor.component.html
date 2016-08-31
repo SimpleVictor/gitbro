@@ -1,30 +1,34 @@
 <div class="text-center">
 
-<strong>https://github.com/{{sendForm.first_param}}/{{sendForm.second_param}}</strong>
+<!--<strong>https://github.com/{{sendForm.first_param}}/{{sendForm.second_param}}</strong>-->
+
+    <div *ngIf="searchingUrl" class="ui active inverted dimmer">
+        <div class="ui small loader"></div>
+        <p>Searching for url now...</p>
+    </div>
 
 </div>
 
-<div class="ui raised segment">
+<!--<div class="ui raised segment">-->
 
     <div class="row directory-row">
 
+        <div class="toolbar">Git Brother</div>
         <!--DIRECTORY CODES-->
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 my-directory">
-                <ul>
-                    <li><i style="color: green" class='folder outline icon'></i>app.js</li>
-                    <li><i style="color: green" class='folder outline icon'></i>angular.js</li>
-                    <li><i style="color: green" class='folder outline icon'></i>jquery.js</li>
-                    <li><i style="color: green" class='folder outline icon'></i>index.html</li>
-                </ul>
+            <h4>Folders</h4>
+            <div class="directory-file">
+                <!--THIS IS WHERE WE WILL APPEND THE HTML DYNAMICALLY-->
+            </div>
         </div>
 
 
         <!--SOURCE CODES-->
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 my-source">
-                <pre>
-                    <code></code>
+                <pre class="line-numbers">
+<code class="language-javascript"></code>
                 </pre>
         </div>
 
     </div>
-</div>
+<!--</div>-->

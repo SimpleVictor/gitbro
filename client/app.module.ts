@@ -5,6 +5,7 @@ import { NgSemanticModule } from "ng-semantic";
 import { AppComponent }  from './app.component';
 import { routing } from "./routes";
 import { HomeModule } from "./modules/home/home.module";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
     imports: [
