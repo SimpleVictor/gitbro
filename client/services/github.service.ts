@@ -6,7 +6,7 @@ import {Observable} from "rxjs/Rx";
 export class GithubService{
 
     testArg ="sdfsdf";
-    secretToken:string= "<GITHUB API KEY>";
+    secretToken:string= "<GITHUB KEY>";
 
     constructor(private _http: Http){
 

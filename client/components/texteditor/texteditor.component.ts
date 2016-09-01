@@ -29,32 +29,51 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     searchingFile:boolean = false;
     startNow: boolean = false;
 
+    OpenedTabs: any[] = [];
+    OpenedDirectory: any[] = [];
+
 
 
     constructor(private _gitService: GithubService, private _fileSplitter: FileSplitter, private el: ElementRef){
-
     }
 
 
     ngOnInit(){
-        //WE HAD TO SET IT UP THIS WAY BECAUSE "this" IS DIFFERENT INSIDE OF THE ON CLICK FUNCTION THAT JQUERY PROVIDES
+
+        // //WE HAD TO SET IT UP THIS WAY BECAUSE "this" IS DIFFERENT INSIDE OF THE ON CLICK FUNCTION THAT JQUERY PROVIDES
         var vm = this;
 
+            // //LISTEN FOR THE CLICK EVENTS ON THE FILES
+            $(this.el.nativeElement).on("click", '.singleLI',function(data){
+                //This is so the parent class's event binding doesn't get triggered as well
+                data.stopImmediatePropagation();
 
-        //LISTEN FOR THE CLICK EVENTS ON THE FILES
-        $(this.el.nativeElement).on("click", '.singleLI',function(data){
-            vm.searchingFile = true;
-            let objectURL = data.target.children[0].innerHTML;
-            if (data.target.children[1].className === 'file text outline icon') {
-                vm.currentLanguage = data.target.children[2].innerHTML;
-                vm.fileClicked(objectURL);
+                //Start LOADER
+                // vm.searchingFile = true;
 
-            };
-            if (data.target.children[1].className === 'folder outline icon') {
-                let elementID = data.target.id;
-                vm.directoryClicked(objectURL, elementID);
-            };
-        });
+                //CHECK IF USERS CLICKS ON ARROW INSTEAD
+                let newTarget;
+                if( data.target.localName === "i"){
+                    console.log("true");
+                    newTarget = data.currentTarget.children[0];
+                }else{
+                    console.log("false");
+                    newTarget = data.target;
+                };
+
+                let objectURL = newTarget.children[1].innerHTML;
+                if (newTarget.children[2].className === 'file text outline icon') {
+                    vm.currentLanguage = newTarget.children[3].innerHTML;
+                    vm.fileClicked(objectURL);
+
+                };
+                if (newTarget.children[2].className === 'folder outline icon') {
+                    let elementID = newTarget.id;
+                    vm.directoryClicked(objectURL, elementID);
+                };
+
+
+            });
 
     }
 
@@ -68,7 +87,6 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
             .subscribe(
                 data => {
                     this.searchingUrl = false;
-                    console.log(data);
                     this.splitTree(data);
                     return;
                 },
@@ -85,6 +103,10 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     ngAfterViewChecked(){
         //MAKES IT SO IT APPIES THE CSS AND JS TO ALL OF "PRE"/"CODE" ELEMENTS
         Prism.highlightAll();
+
+
+
+
     }
 
 
@@ -97,43 +119,58 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     }
 
     OutputToHtml(data){
-        console.log(data);
-
         //Delete any previous ones
         $("#directory-holder").remove();
 
         let liCSS = "font-size: 20px;cursor: pointer; display: table";
         let ulCSS = "list-style: none;padding: 0 20px 20px 20px;";
 
-        let myHTML = "";
 
-        myHTML += `<ul id="directory-holder" style="${ulCSS}">`;
+
+            let myHTML      = ``;
+
+        myHTML          += `<ul id="directory-holder" style="${ulCSS}">`;
 
         for(let i in data){
+            //WE USE THE RANDOM NUMBER TO GENERATE A UNIQUE ID FOR EACH DIRECTORY
+            //THE USE OF THIS IS TO BE ABLE TO TOGGLE THE DIRECTORY TO CLOSE AND ALL
+            let randomNum = Math.floor(Math.random()*200);
+            let dataPath = data[i].path;
+            let idPath = ""+dataPath+randomNum+"";
 
-            myHTML += `<li style="${liCSS}" class="singleLI" id="${data[i].path}">`;
+            myHTML      += `<li style="${liCSS}" class="singleLI" id="${data[i].path}">`;
 
-            myHTML += `<p style="display: none">${data[i].url}</p>`;
+            myHTML      += `<div id="${idPath}">`;
+
+            myHTML      += `<i class="chevron right icon"></i>`;
+
+            myHTML      += `<p style="display: none">${data[i].url}</p>`;
             //IF OBJECT IS A FILE
             if(data[i].type === "file"){
-                myHTML += `<i style="color: green" class='file text outline icon'></i> `;
-                myHTML += `<p style="display: none">${data[i].language}</p>`;
+                myHTML  += `<i style="color: green" class='file text outline icon'></i> `;
+                myHTML  += `<p style="display: none">${data[i].language}</p>`;
             };
             //IF OBJECT IS A DIRECTORY
             if(data[i].type === "dir"){
-                myHTML += `<i style="color: green" class='folder outline icon'></i> `;
-                myHTML += `<p style="display: none">${data[i].language}</p>`;
+                myHTML  += `<i style="color: green" class='folder outline icon'></i> `;
+                myHTML  += `<p style="display: none">${data[i].language}</p>`;
             };
-            myHTML += `${data[i].name}`;
-            myHTML += `</li>`;
+            myHTML      += `${data[i].name}`;
+
+            myHTML      += `</div>`;
+
+            myHTML      += `</li>`;
         };
 
-        myHTML += `</ul>`;
+        myHTML          += `</ul>`;
 
         $(this.el.nativeElement).find('.directory-file').append(myHTML);
-        console.log("all done!");
 
     }
+
+// <i class="chevron right icon"></i>
+// <i class="chevron down icon"></i>
+
 
 
     fileClicked(dataUrl){
@@ -141,7 +178,6 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
             .subscribe(
                 data => {
                     this.searchingFile = false;
-                    console.log(this.currentLanguage);
                     $('#mycodeoutput').empty();
                     $('#mycodeoutput').attr('class', `language-${this.currentLanguage}`);
                     $('#mycodeoutput').append(data._body);
@@ -155,7 +191,6 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     }
 
     directoryClicked(dataUrl, elemID){
-
         this._gitService.getAdditionalDirectory(dataUrl).subscribe(
             data => {
                 let returnData = this._fileSplitter.rootDirectorySplit(data, 2);
@@ -170,51 +205,66 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
 
 
     OutputToHtmlAnotherDirectory(data, id){
-        console.log(data);
-        console.log(id);
-
         //GRAB THE DIR HTML WE SET UP BEFORE
         let targetHTML = $(`#${id}`);
-
-
-
 
         let liCSS = "font-size: 20px;cursor: pointer; display: table";
         let ulCSS = "list-style: none;padding: 0 20px 0 20px;";
 
-        let myHTML = "";
+        let myHTML      = "";
 
-        myHTML += `<ul style="${ulCSS}">`;
+
+
+        myHTML          += `<ul style="${ulCSS}">`;
 
         for(let i in data){
+            //WE USE THE RANDOM NUMBER TO GENERATE A UNIQUE ID FOR EACH DIRECTORY
+            //THE USE OF THIS IS TO BE ABLE TO TOGGLE THE DIRECTORY TO CLOSE AND ALL
+            let randomNum = Math.floor(Math.random()*200);
+            let dataPath = data[i].path;
+            let idPath = ""+dataPath+randomNum+"";
 
-            myHTML += `<li style="${liCSS}" class="singleLI" id="${data[i].path}">`;
+            myHTML      += `<li style="${liCSS}" class="singleLI" id="${data[i].path}">`;
 
-            myHTML += `<p style="display: none">${data[i].url}</p>`;
+            myHTML      += `<div id="${idPath}">`;
+
+            myHTML      += `<i class="chevron right icon"></i>`;
+
+            myHTML      += `<p style="display: none">${data[i].url}</p>`;
             //IF OBJECT IS A FILE
             if(data[i].type === "file"){
-                myHTML += `<i style="color: green" class='file text outline icon'></i> `;
-                myHTML += `<p style="display: none">${data[i].language}</p>`;
+                myHTML  += `<i style="color: green" class='file text outline icon'></i> `;
+                myHTML  += `<p style="display: none">${data[i].language}</p>`;
             };
             //IF OBJECT IS A DIRECTORY
             if(data[i].type === "dir"){
-                myHTML += `<i style="color: green" class='folder outline icon'></i> `;
-                myHTML += `<p style="display: none">${data[i].language}</p>`;
+                myHTML  += `<i style="color: green" class='folder outline icon'></i> `;
+                myHTML  += `<p style="display: none">${data[i].language}</p>`;
             };
-            myHTML += `${data[i].name}`;
-            myHTML += `</li>`;
+            myHTML      += `${data[i].name}`;
+
+            myHTML      += `</div>`;
+
+            myHTML      += `</li>`;
         };
 
-        myHTML += `</ul>`;
+        myHTML          += `</ul>`;
 
         this.searchingFile = false;
         targetHTML.append(myHTML);
-        console.log("Second all done");
 
 
 
 
 
+    }
+
+
+
+    hideBar(){
+
+        // console.log()
+        $("#testMan").slideToggle();
     }
 
 

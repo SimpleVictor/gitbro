@@ -15,12 +15,19 @@ export class FileSplitter{
         for(let i in data){
             let singleData = data[i];
             let splitObject;
+
+            //USE REGEX TO REMOVE FOWARD SLASH IN PATH
+            let slashSTR =  singleData.path;
+            let noMoreSlash = slashSTR.replace(/\//g, "");
+
             //IF FILE
             if(singleData.type === "file"){
                 let returnLanguage = this.findLanguage(singleData.name);
+
+
                 splitObject = {
                     url: singleData.git_url,
-                    path: singleData.path,
+                    path: noMoreSlash,
                     type: singleData.type,
                     name: singleData.name,
                     language: returnLanguage,
@@ -31,7 +38,7 @@ export class FileSplitter{
             if(singleData.type === "dir"){
                 splitObject = {
                     language: "none",
-                    path: singleData.path,
+                    path: noMoreSlash,
                     url: singleData.url,
                     type: singleData.type,
                     name: singleData.name,

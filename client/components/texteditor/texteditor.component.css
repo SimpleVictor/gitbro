@@ -36,6 +36,7 @@ pre.line-numbers{
 
     background-color: #E7E4E7;
     height: 100%;
+    overflow: auto;
     padding: 0;
 
 }
@@ -44,6 +45,7 @@ pre.line-numbers{
     opacity: 0.3;
     font-weight: bolder;
     font-size: 25px;
+    position: relative;
     letter-spacing: 2px;
     padding : 20px 20px 0 20px;
 }
@@ -55,6 +57,10 @@ pre.line-numbers{
 
 .my-directory > .directory-file > ul > li{
     font-size: 20px;
+}
+
+.directory-file{
+    position: relative;
 }
 
 pre{
