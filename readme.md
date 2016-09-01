@@ -27,7 +27,7 @@ secretToken:string= "<GITHUB TOKEN HERE>";
 
 ## start server
 ```
-node ./bin/www
+npm run develop
 ```
 
 
