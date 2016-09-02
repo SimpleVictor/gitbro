@@ -1,12 +1,24 @@
+
+#text-container{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
 .toolbar{
-    text-align: center;
     color: #FFF;
     margin: 0;
     letter-spacing: 20px;
     font-size: 20px;
-
+    margin: 0 -15px;
     font-weight: bolder;
+    padding: 0px 5px 5px 5px;
+
     background-color: black;
+}
+
+.toolbar-item{
+    display: inline;
 }
 
 /*.ui.small.loader{*/
@@ -22,6 +34,12 @@
     color: white;
     background: #337AB7;
     border: 2px solid #337AB7;
+    position: absolute;
+    right:0;
+}
+#hide-button:hover{
+    background: #265C8A;
+    border-color: #265C8A;
 }
 
 
@@ -43,7 +61,7 @@ pre.line-numbers{
 
     background-color: #E7E4E7;
     height: 100%;
-    overflow: auto;
+    /*overflow: auto;*/
     padding: 0;
 
 }

@@ -1,11 +1,15 @@
-@media (min-width: 671px) {
+@media (min-width: 786px) {
 
 
 }
-@media (min-width: 520px) and (max-width: 670px) {
+@media (min-width: 520px) and (max-width: 785px) {
 
     .single-input{
         width: 150px !important;
+    }
+
+    #fork-me{
+        height:15% !important;
     }
 
 
@@ -16,17 +20,28 @@
         width: 100px !important;
     }
 
+    #fork-me{
+        height:10% !important;
+    }
+
+}
+
+#top-piece-container{
+    height: 100%;
+    width: 100%;
 }
 
 #fork-me{
     position:absolute;
     top:0;
-    left: 0;
-    height: 30%;
+    left: -15px;
+    height: 20%;
     -ms-transform: rotate(-90deg); /* IE 9 */
     -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
     transform: rotate(-90deg);
 }
+
+
 
 
 .home-container{
