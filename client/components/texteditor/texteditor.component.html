@@ -1,29 +1,30 @@
-<div class="text-center">
+<div *ngIf="searchingUrl" class="text-center">
 
-<!--<strong>https://github.com/{{sendForm.first_param}}/{{sendForm.second_param}}</strong>-->
 
-    <div *ngIf="searchingUrl" class="ui active inverted dimmer">
+    <div class="ui active inverted dimmer">
         <div class="ui small loader"></div>
         <p>Searching for url now...</p>
     </div>
 
 </div>
 
-<!--<div class="ui raised segment">-->
+
+<div id="text-container">
+
+
+
+        <div class="toolbar"><div class="toolbar-item" style="text-align: center">Git Brother</div><button id="hide-button" classs="btn btn-primary toolbar-item" (click)="hideButton()"><i class="arrow circle up icon"></i>Hide</button></div>
 
     <div class="row directory-row">
 
-        <div class="toolbar">Git Brother<button id="hide-button" classs="btn btn-primary">Hide</button></div>
         <!--DIRECTORY CODES-->
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 my-directory">
+        <div id="resiable" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 my-directory">
             <h4>Folders</h4><div *ngIf="searchingFile" id="fileloader" class="ui active small loader"></div>
-            <!--<button class="btn btn-primary btn-block" (click)="hideBar()">Hide</button>-->
             <!--Loader for file changes-->
 
 
             <div class="directory-file">
                 <!--THIS IS WHERE WE WILL APPEND THE HTML DYNAMICALLY-->
-
             </div>
         </div>
 
@@ -32,7 +33,5 @@
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 my-source">
                 <pre class="line-numbers"><code id="mycodeoutput" class="language-javascript"></code></pre>
         </div>
-
-
     </div>
-<!--</div>-->
+</div>

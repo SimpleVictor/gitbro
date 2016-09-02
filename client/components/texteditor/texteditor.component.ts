@@ -33,15 +33,23 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     OpenedDirectory: any[] = [];
 
 
+    globalWidth;
+
+    totalWidth;
+    resizeWidth;
+    newWidth;
 
     constructor(private _gitService: GithubService, private _fileSplitter: FileSplitter, private el: ElementRef){
     }
 
 
     ngOnInit(){
-
         // //WE HAD TO SET IT UP THIS WAY BECAUSE "this" IS DIFFERENT INSIDE OF THE ON CLICK FUNCTION THAT JQUERY PROVIDES
         var vm = this;
+
+
+        this.globalWidth = window.outerWidth - 10;
+
 
             // //LISTEN FOR THE CLICK EVENTS ON THE FILES
             $(this.el.nativeElement).on("click", '.singleLI',function(data){
@@ -71,9 +79,45 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
                     let elementID = newTarget.id;
                     vm.directoryClicked(objectURL, elementID);
                 };
-
-
             });
+
+        // console.log($("#resiable"));
+
+        $("#resiable").resizable({
+            minWidth: 200,
+            resize: function(event, ui){
+                // console.log(event);
+                vm.totalWidth = event.target.offsetParent.clientWidth;
+                vm.resizeWidth = ui.size.width;
+                // let sourceWidth = event.target.nextElementSibling.clientWidth;
+
+                vm.newWidth = vm.totalWidth - vm.resizeWidth;
+                $(".my-source").width(vm.newWidth);
+                // console.log(ui);
+                // let rowWidth = event.toElement.
+            }
+        });
+
+
+        $(window).on('resize', function(){
+            let newCheck = window.outerWidth - 10;
+            if(newCheck === vm.globalWidth){
+                return;
+            }
+            vm.globalWidth = window.outerWidth - 10;
+
+            let directory = (Math.floor((vm.resizeWidth/vm.totalWidth)*100))+1;
+            let sourcecode = Math.floor((vm.newWidth/vm.totalWidth)*100);
+
+            directory.toString();
+            sourcecode.toString();
+
+
+            $("#resiable").width(directory+"%");
+            $(".my-source").width(sourcecode+"%");
+
+        });
+
 
     }
 
@@ -103,9 +147,6 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     ngAfterViewChecked(){
         //MAKES IT SO IT APPIES THE CSS AND JS TO ALL OF "PRE"/"CODE" ELEMENTS
         Prism.highlightAll();
-
-
-
 
     }
 
@@ -261,10 +302,13 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
 
 
 
-    hideBar(){
+    hideButton(){
+        $("#top-container").slideToggle();
+    }
 
-        // console.log()
-        $("#testMan").slideToggle();
+
+    testMe(){
+        $(".my-source").width("20");
     }
 
 
