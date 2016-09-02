@@ -1,6 +1,5 @@
 .toolbar{
     text-align: center;
-    padding: 2px 0;
     color: #FFF;
     margin: 0;
     letter-spacing: 20px;
@@ -17,6 +16,14 @@
 /*.ui.loader{*/
     /*top: -2%;*/
 /*}*/
+
+
+#hide-button{
+    color: white;
+    background: #337AB7;
+    border: 2px solid #337AB7;
+}
+
 
 #fileloader{
     position: relative !important;

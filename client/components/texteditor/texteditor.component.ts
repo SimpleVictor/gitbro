@@ -49,7 +49,7 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
                 data.stopImmediatePropagation();
 
                 //Start LOADER
-                // vm.searchingFile = true;
+                vm.searchingFile = true;
 
                 //CHECK IF USERS CLICKS ON ARROW INSTEAD
                 let newTarget;
@@ -123,7 +123,7 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
         $("#directory-holder").remove();
 
         let liCSS = "font-size: 20px;cursor: pointer; display: table";
-        let ulCSS = "list-style: none;padding: 0 20px 20px 20px;";
+        let ulCSS = "list-style: none;padding: 0 20px 20px 20px;width: 1000px";
 
 
 
