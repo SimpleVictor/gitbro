@@ -23,6 +23,7 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
 
     //Dynamically changing current language on <code>
     currentLanguage:string;
+    currentContent:string;
 
     //LOADER
     searchingUrl:boolean = false;
@@ -33,11 +34,13 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
     OpenedDirectory: any[] = [];
 
 
-    globalWidth;
+    //Dynamic Width
 
+    globalWidth;
     totalWidth;
     resizeWidth;
     newWidth;
+    windowStart:boolean = false;
 
     constructor(private _gitService: GithubService, private _fileSplitter: FileSplitter, private el: ElementRef){
     }
@@ -86,6 +89,7 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
         $("#resiable").resizable({
             minWidth: 200,
             resize: function(event, ui){
+                vm.windowStart = true;
                 // console.log(event);
                 vm.totalWidth = event.target.offsetParent.clientWidth;
                 vm.resizeWidth = ui.size.width;
@@ -100,22 +104,27 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
 
 
         $(window).on('resize', function(){
-            let newCheck = window.outerWidth - 10;
-            if(newCheck === vm.globalWidth){
+            if(vm.windowStart){
+                vm.windowStart = false;
+                let newCheck = window.outerWidth - 10;
+                if(newCheck === vm.globalWidth){
+                    return;
+                }
+                vm.globalWidth = window.outerWidth - 10;
+
+                let directory = (Math.floor((vm.resizeWidth/vm.totalWidth)*100))+1;
+                let sourcecode = Math.floor((vm.newWidth/vm.totalWidth)*100);
+
+                directory.toString();
+                sourcecode.toString();
+
+
+                $("#resiable").width(directory+"%");
+                $(".my-source").width(sourcecode+"%");
+
+            }else{
                 return;
             }
-            vm.globalWidth = window.outerWidth - 10;
-
-            let directory = (Math.floor((vm.resizeWidth/vm.totalWidth)*100))+1;
-            let sourcecode = Math.floor((vm.newWidth/vm.totalWidth)*100);
-
-            directory.toString();
-            sourcecode.toString();
-
-
-            $("#resiable").width(directory+"%");
-            $(".my-source").width(sourcecode+"%");
-
         });
 
 
