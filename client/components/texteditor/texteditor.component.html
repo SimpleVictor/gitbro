@@ -15,10 +15,10 @@
 
         <div class="toolbar"><div class="toolbar-item" style="text-align: center">Git Brother</div><button id="hide-button" classs="btn btn-primary toolbar-item" (click)="hideButton()"><i class="arrow circle up icon"></i>Hide</button></div>
 
-    <div class="row directory-row">
+    <div class="directory-row">
 
         <!--DIRECTORY CODES-->
-        <div id="resiable" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 my-directory">
+        <div id="resiable" class="my-directory">
             <h4>Folders</h4><div *ngIf="searchingFile" id="fileloader" class="ui active small loader"></div>
             <!--Loader for file changes-->
 
@@ -30,8 +30,85 @@
 
 
         <!--SOURCE CODES-->
-        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 my-source">
-                <pre class="line-numbers"><code id="mycodeoutput" class="language-javascript"></code></pre>
+        <div class="my-source">
+                <pre class="line-numbers"><code id="mycodeoutput" class="language-javascript">
+
+
+
+
+
+                </code></pre>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div *ngIf="searchingUrl" class="text-center">-->
+
+
+    <!--<div class="ui active inverted dimmer">-->
+        <!--<div class="ui small loader"></div>-->
+        <!--<p>Searching for url now...</p>-->
+    <!--</div>-->
+
+<!--</div>-->
+
+
+<!--<div id="text-container">-->
+
+
+
+    <!--<div class="toolbar"><div class="toolbar-item" style="text-align: center">Git Brother</div><button id="hide-button" classs="btn btn-primary toolbar-item" (click)="hideButton()"><i class="arrow circle up icon"></i>Hide</button></div>-->
+
+    <!--<div class="row directory-row">-->
+
+        <!--&lt;!&ndash;DIRECTORY CODES&ndash;&gt;-->
+        <!--<div id="resiable" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 my-directory">-->
+            <!--<h4>Folders</h4><div *ngIf="searchingFile" id="fileloader" class="ui active small loader"></div>-->
+            <!--&lt;!&ndash;Loader for file changes&ndash;&gt;-->
+
+
+            <!--<div class="directory-file">-->
+                <!--&lt;!&ndash;THIS IS WHERE WE WILL APPEND THE HTML DYNAMICALLY&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+        <!--&lt;!&ndash;SOURCE CODES&ndash;&gt;-->
+        <!--<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 my-source">-->
+                <!--<pre class="line-numbers"><code id="mycodeoutput" class="language-javascript">-->
+
+
+
+
+
+                <!--</code></pre>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

@@ -23,7 +23,7 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
 
     //Dynamically changing current language on <code>
     currentLanguage:string;
-    currentContent:string;
+    currentContent:string ="console.log('sdfsdf')";
 
     //LOADER
     searchingUrl:boolean = false;
@@ -50,6 +50,7 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
         // //WE HAD TO SET IT UP THIS WAY BECAUSE "this" IS DIFFERENT INSIDE OF THE ON CLICK FUNCTION THAT JQUERY PROVIDES
         var vm = this;
 
+        Prism.highlightAll();
 
         this.globalWidth = window.outerWidth - 10;
 
@@ -155,7 +156,7 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
 
     ngAfterViewChecked(){
         //MAKES IT SO IT APPIES THE CSS AND JS TO ALL OF "PRE"/"CODE" ELEMENTS
-        Prism.highlightAll();
+
 
     }
 
@@ -229,9 +230,9 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
                 data => {
                     this.searchingFile = false;
                     $('#mycodeoutput').empty();
-                    $('#mycodeoutput').attr('class', `language-${this.currentLanguage}`);
+                    $('#mycodeoutput').attr('class', `language-${this.currentLanguage} line-numbers`);
                     $('#mycodeoutput').append(data._body);
-
+                    Prism.highlightAll();
                     // this.codeOutput = data._body;
                 }, err => {
                     this.searchingFile = false;
@@ -302,7 +303,6 @@ export class TextEditorComponent implements OnInit, AfterViewChecked, DoCheck{
 
         this.searchingFile = false;
         targetHTML.append(myHTML);
-
 
 
 

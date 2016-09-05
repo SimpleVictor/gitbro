@@ -2,7 +2,7 @@
 #text-container{
     height: 100%;
     width: 100%;
-    position: fixed;
+    /*position: fixed;*/
 }
 
 .toolbar{
@@ -10,7 +10,6 @@
     margin: 0;
     letter-spacing: 20px;
     font-size: 20px;
-    margin: 0 -15px;
     font-weight: bolder;
     padding: 0px 5px 5px 5px;
 
@@ -55,6 +54,7 @@ pre.line-numbers{
 
 .directory-row{
     height: 100%;
+    display: flex;
 }
 
 .my-directory{
@@ -63,6 +63,7 @@ pre.line-numbers{
     height: 100%;
     /*overflow: auto;*/
     padding: 0;
+    width: 25%;
 
 }
 
@@ -97,6 +98,7 @@ pre{
 .my-source{
     /*border: 1px solid green;*/
     height: 100%;
+    width:75%;
     padding: 0 !important;
 
 }
