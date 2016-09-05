@@ -17,7 +17,7 @@ import {FormsModule} from "@angular/forms";
         SharedModule.forRoot(),
         NgSemanticModule,
     ],
-    declarations: [ HomeComponent, TextEditorComponent ],
+    declarations: [ HomeComponent, TextEditorComponent],
     bootstrap:    [ HomeComponent ]
 })
 export class HomeModule { }
